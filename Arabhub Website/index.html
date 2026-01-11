@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Arab Hub</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: monospace;
+    background: #0a0a0a;
+    color: #e5e5e5;
+    overflow-x: hidden;
+}
+
+/* NAV */
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #1c1c1c;
+}
+
+.nav button {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.nav button.active {
+    color: #b36bff;
+}
+
+/* CONTENT */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+h1 {
+    font-size: 44px;
+    z-index: 2;
+    position: relative;
+}
+
+/* PARTICLES */
+.particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    color: rgba(179, 107, 255, 0.35);
+    font-size: 14px;
+    animation: float 12s linear infinite;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh);
+    }
+    to {
+        transform: translateY(-120vh);
+    }
+}
+
+/* CODE */
+.code-box {
+    background: #0f0f0f;
+    border: 1px solid #1c1c1c;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+    overflow-x: auto;
+    font-size: 13px;
+}
+
+.copy-btn {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background: #7d3cff;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.discord-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 30px;
+    background: #5865F2;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    z-index: 2;
+    position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+    <button class="active" onclick="openTab('home', this)">Home</button>
+    <button onclick="openTab('scripts', this)">Scripts</button>
+</div>
+
+<!-- HOME -->
+<div id="home" class="container">
+    <div class="particles" id="particles"></div>
+
+    <h1>Arab Hub</h1>
+
+    <a class="discord-btn" href="https://discord.gg/cTDjrPsQBM" target="_blank">
+        Join Discord
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+<div id="scripts" class="container hidden">
+
+    <h2>Arab Hub Loader</h2>
+    <pre class="code-box" id="code1">loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/896e30cd07c82c7c6d8947fc3ab6a36f4252e1b16606f75c3f17e205f199a105/download"))()</pre>
+    <button class="copy-btn" onclick="copy('code1')">Copy</button>
+
+    <br><br>
+
+    <h2>Arab Hub Rost Alpha</h2>
+    <pre class="code-box" id="code2">loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/01ee680f7ada8f263ab40ee4ed27bb3fe40970aa32e973c286f314a45db0d5ef/download"))()</pre>
+    <button class="copy-btn" onclick="copy('code2')">Copy</button>
+
+</div>
+
+<script>
+const symbols = ["function", "end", "local", "{}", "()", "=", "::", "then", "if"];
+const particleContainer = document.getElementById("particles");
+
+for (let i = 0; i < 30; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = (8 + Math.random() * 10) + "s";
+    p.style.fontSize = (12 + Math.random() * 10) + "px";
+    particleContainer.appendChild(p);
+}
+
+function openTab(tab, btn) {
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("scripts").classList.add("hidden");
+    document.getElementById(tab).classList.remove("hidden");
+
+    document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+}
+
+function copy(id) {
+    navigator.clipboard.writeText(
+        document.getElementById(id).innerText
+    );
+}
+</script>
+
+</body>
+</html>
